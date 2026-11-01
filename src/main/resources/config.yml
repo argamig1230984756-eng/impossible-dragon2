@@ -1,0 +1,95 @@
+# ImpossibleDragon configuration
+# Phase 1: HP > 66%   Phase 2: 33-66%   Phase 3 (ENRAGED): < 33%
+
+dragon:
+  max-health: 800              # vanilla = 200 (hard cap by Minecraft: 1024)
+  damage-taken-multiplier: 0.6 # all damage the dragon takes is multiplied by this
+  max-damage-per-hit: 25       # no more one-shotting with beds/swords (0 = off)
+  damage-dealt-multiplier: 1.6 # damage the dragon (and its projectiles) deal to players
+  lifesteal: 0.5               # dragon heals this fraction of damage it deals
+  crystal-heal-per-second: 0.5 # EXTRA healing per alive end crystal, per second
+  enrage-cooldown-multiplier: 0.55 # in phase 3 ability cooldowns are multiplied by this
+  flip-facing: false           # set true if the tail/mouth effects show up on the wrong end
+  boss-bar-title: "&5&lImpossible Ender Dragon"
+
+abilities:
+  fireball:                    # dragon breath fireballs that also EXPLODE on impact
+    enabled: true
+    min-phase: 1
+    cooldown-seconds: 8
+    count: 3                   # +1 per phase above 1
+    explosion-power: 2.5       # 0 = vanilla (no explosion)
+
+  wither-skulls:
+    enabled: true
+    min-phase: 2
+    cooldown-seconds: 12
+    count: 3
+    break-blocks: false
+
+  lightning:                   # marked with sparks, strikes ~1s later -> dodge it
+    enabled: true
+    min-phase: 2
+    cooldown-seconds: 10
+    bolts: 2                   # +1 in phase 3
+
+  minions:
+    enabled: true
+    min-phase: 1
+    cooldown-seconds: 25
+    per-wave: 3
+    max-alive: 10
+    lifetime-seconds: 60
+    types: [ENDERMAN, VEX, ENDERMAN, PHANTOM]
+
+  roar:                        # darkness + nausea + slowness
+    enabled: true
+    min-phase: 2
+    cooldown-seconds: 30
+    radius: 50
+
+  levitation:                  # lifts you up, then you fall
+    enabled: true
+    min-phase: 3
+    cooldown-seconds: 25
+    duration-ticks: 40
+
+  crystals:                    # destroyed pillar crystals come back
+    enabled: true
+    min-phase: 2
+    cooldown-seconds: 45       # one crystal respawns each interval
+    respawn-on-phase-change: true
+
+  tail:                        # telegraphed tail sweep when players stand near the dragon
+    enabled: true
+    min-phase: 1
+    cooldown-seconds: 7
+    range: 30
+    damage: 8
+    knockback: 1.4
+
+  lightning-breath:            # charges at the mouth, beam hits where you WERE standing
+    enabled: true
+    min-phase: 2
+    cooldown-seconds: 14
+    windup-ticks: 24
+    damage: 10
+    length: 70
+
+effects:
+  crystal-circles:
+    enabled: true          # animated purple magic circles + shield around each crystal
+
+rewards:
+  bonus-xp: 3000
+  items:                       # MATERIAL:amount
+    - "NETHERITE_INGOT:2"
+    - "ENCHANTED_GOLDEN_APPLE:1"
+    - "DIAMOND:16"
+
+messages:
+  phase-2: "&d&lThe Impossible Dragon grows stronger..."
+  phase-3: "&4&lTHE DRAGON IS ENRAGED!"
+  roar: "&5The dragon roars!"
+  lift: "&bThe void lifts you..."
+  death: "&a&lThe Impossible Dragon has been slain!"
